@@ -1,0 +1,109 @@
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso Amor Eterno 💖</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffdde1;
+            color: #d6006c;
+            padding: 50px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        .mensagem {
+            font-size: 1.3em;
+            color: #b30047;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: justify;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .contador-container {
+            margin-top: 50px;
+        }
+        .titulo-final {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-top: 40px;
+        }
+        #contador {
+            font-size: 2em;
+            font-weight: bold;
+            background: white;
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Nosso Amor 💖</h1>
+
+    <div class="mensagem">
+        <p>Quando sentir vontade de chorar, me chame, que eu venho chorar com você. Quando sentir vontade de sorrir, me avise, que eu venho para sorrirmos juntos. Quando sentir vontade de amar, me chame, que eu venho amar você.</p>
+
+        <p>Quando você sentir que tudo está acabado, me chame, que eu venho te ajudar a reconstruir. Quando você achar que o mundo está grande demais para tua tristeza, me chame, que eu faço ele pequeno para tua felicidade.</p>
+
+        <p>Quando você precisar de companhia, naqueles dias nublados e tristes, ou nos dias lindos e ensolarados, me avise, que eu venho te fazer companhia. Quando você estiver precisando ouvir alguém dizer "Te Amo", me avise, que eu venho dizer a você a qualquer hora.</p>
+
+        <p>E quando você não precisar mais de mim, me diga, pois o meu amor por você é imenso, mas mesmo assim eu simplesmente irei embora.</p>
+    </div>
+
+    <div class="contador-container">
+        <p class="titulo-final">Que esse tempo que estamos juntos só aumente como o nosso amor 💕</p>
+        <div id="contador"></div>
+    </div>
+
+    <script>
+        function atualizarContador() {
+            const dataInicio = new Date("2024-08-30T00:00:00").getTime();
+            const agora = new Date().getTime();
+            const diferenca = agora - dataInicio;
+
+            if (diferenca < 0) {
+                document.getElementById("contador").innerHTML = "Aguardando o dia 30/08/2024...";
+                return;
+            }
+
+            const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
+
+            const dataAtual = new Date(dataInicio + diferenca);
+            const dia = String(dataAtual.getDate()).padStart(2, '0');
+            const mes = String(dataAtual.getMonth() + 1).padStart(2, '0');
+            const ano = dataAtual.getFullYear();
+            const hora = String(dataAtual.getHours()).padStart(2, '0');
+            const minuto = String(dataAtual.getMinutes()).padStart(2, '0');
+            const segundo = String(dataAtual.getSeconds()).padStart(2, '0');
+
+            document.getElementById("contador").innerHTML = 
+                `${dia}/${mes}/${ano} ${hora}:${minuto}:${segundo}`;
+            
+            const dataFim = new Date("2050-01-01T00:00:00").getTime();
+            if (agora >= dataFim) {
+                document.getElementById("contador").innerHTML = "Nosso amor é eterno! 💖";
+                clearInterval(intervalo);
+            }
+        }
+
+        let intervalo = setInterval(atualizarContador, 1000);
+        atualizarContador();
+    </script>
+<img src="/storage/emulated/0/Amor/Amor.jpeg" alt="" width="200" width="200"/>
+</body>
+</html>
+
+
