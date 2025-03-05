@@ -29,6 +29,58 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
+         .carousel-container {
+            margin-top: 50px;
+            position: relative;
+            max-width: 600px;
+            margin: auto;
+        }
+        .carousel-title {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        .carousel {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        .carousel-media {
+            width: 100%;
+            display: none;
+            border-radius: 10px;
+        }
+        .carousel-media.active {
+            display: block;
+        }
+        video {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .carousel-buttons {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            max-width: 650px;
+            margin: auto;
+        }
+        .carousel-buttons button {
+            font-size: 2em;
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            cursor: pointer;
+            color: #d6006c;
+            padding: 10px 20px;
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+        .carousel-buttons button:hover {
+            background: rgba(255, 255, 255, 1);
+        }
         .contador-container {
             margin-top: 50px;
         }
@@ -81,11 +133,57 @@ Minha flor do oriente</p>
 
         <p>Te Amo muito minha gatinha 🐅 coelhinha 🐰 gostosinha 😍</p>
     </div>
+        <!-- Carrossel de Imagens e Vídeo -->
+    <div class="carousel-container">
+        <h2 class="carousel-title">❤️ Nossos momentos juntos ❤️</h2>
+        <div class="carousel">
+            <img class="carousel-media active" src="Amor1.jpg" alt="Nosso momento 1">
+            <img class="carousel-media" src="Amor2.jpg" alt="Nosso momento 2">
+            <img class="carousel-media" src="Amor4.jpg" alt="Nosso momento 3">
+            <img class="carousel-media" src="Amor5.jpg" alt="Nosso momento 4">
+            <video class="carousel-media" controls>
+                <source src="Amor3.mp4" type="video/mp4">
+                Seu navegador não suporta vídeos.
+            </video>
+        </div>
+        <div class="carousel-buttons">
+            <button onclick="mudarSlide(-1)">⬅️</button>
+            <button onclick="mudarSlide(1)">➡️</button>
+        </div>
+    </div>
 
         <div class="contador-container">
         <p class="titulo-final">Que esse tempo que estamos juntos só aumente como o nosso amor 💕</p>
         <div id="contador"></div>
-        <div>    
+        
+    <div class="contador-container">
+        <div id="contador"></div> 
+        <div id="tempoPassado"></div>
+    </div>
+
+    <script>
+        const midias = document.querySelectorAll(".carousel-media");
+        let indice = 0;
+
+        function mudarSlide(direcao) {
+            midias[indice].classList.remove("active");
+
+            // Se estiver no vídeo, pausa antes de mudar
+            if (midias[indice].tagName === "VIDEO") {
+                midias[indice].pause();
+            }
+
+            indice += direcao;
+            if (indice < 0) {
+                indice = midias.length - 1;
+            } else if (indice >= midias.length) {
+                indice = 0;
+            }
+
+            midias[indice].classList.add("active");
+        }
+        
+            <div>    
             <p></p>
         </div>
                <!-- Imagem abaixo do contador -->
