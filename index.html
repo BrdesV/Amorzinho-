@@ -1,5 +1,4 @@
-
-<html lang="pt-BR">
+><html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,13 +31,55 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
-        .contador-container {
+        .carousel-container {
             margin-top: 50px;
+            max-width: 600px;
+            margin: auto;
+            position: relative;
         }
-        .titulo-final {
+        .carousel-title {
             font-size: 2em;
-            font-weight: bold;
-            margin-top: 40px;
+            margin-bottom: 10px;
+        }
+        .carousel {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        .carousel-media {
+            width: 100%;
+            display: none;
+            border-radius: 10px;
+        }
+        .carousel-media.active {
+            display: block;
+        }
+        video {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .carousel-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 15px;
+        }
+        .carousel-buttons button {
+            font-size: 2em;
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            cursor: pointer;
+            color: #d6006c;
+            padding: 10px 20px;
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+        .carousel-buttons button:hover {
+            background: rgba(255, 255, 255, 1);
         }
         #contador {
             font-family: "Ballet", cursive;
@@ -49,18 +90,12 @@
             padding: 15px 30px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 2;
-            background: rgba(255, 255, 255, 0.8);
+            margin-top: 20px;
         }
-        #imagem {
-            width: 250px;
-            height: auto;
+        #imagemFinal {
+            width: 50%;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            display: block;
-            margin: 0 auto;
+            margin-top: 20px;
         }
         #tempoPassado {
             font-family: "Ballet", cursive;
@@ -76,14 +111,13 @@
     <h1>Nosso Amor 💖</h1>
 
     <div class="mensagem">
-        
-    <<p>Quando sentir vontade de chorar, me chame, que eu venho chorar com você. Quando sentir vontade de sorrir, me avise, que eu venho para sorrirmos juntos. Quando sentir vontade de amar, me chame, que eu venho amar você.</p>
+        <p>Quando sentir vontade de chorar, me chame, que eu venho chorar com você. Quando sentir vontade de sorrir, me avise, que eu venho para sorrirmos juntos. Quando sentir vontade de amar, me chame, que eu venho amar você.</p>
 
         <p>Quando você sentir que tudo está acabado, me chame, que eu venho te ajudar a reconstruir. Quando você achar que o mundo está grande demais para tua tristeza, me chame, que eu faço ele pequeno para tua felicidade.</p>
 
         <p>Quando você precisar de companhia, naqueles dias nublados e tristes, ou nos dias lindos e ensolarados, me avise, que eu venho te fazer companhia. Quando você estiver precisando ouvir alguém dizer "Te Amo", me avise, que eu venho dizer a você a qualquer hora.</p>
 
-        <p>Hey, minha princesa, meu céu, minha lua
+       <p>Hey, minha princesa, meu céu, minha lua
 Por ti sou capaz de agarrar o sol com a unha
 E nunca se esqueça que te quero para sempre
 Pois você é minha riqueza
@@ -92,54 +126,35 @@ Minha flor do oriente</p>
         <p>Te Amo muito minha gatinha 🐅 coelhinha 🐰 gostosinha 😍</p>
     </div>
 
-    <div class="contador-container">
-        <div id="contador"></div> 
-        
-        <!-- Imagem abaixo do contador -->
-        <img id="imagem" src="Amor.jpeg" alt="Nossa foto juntos">
-
-        <div id="tempoPassado"></div>
+    <div class="carousel-container">
+        <h2 class="carousel-title">❤️ Nossos momentos juntos ❤️</h2>
+        <div class="carousel">
+            <img class="carousel-media active" src="Amor1.jpg" alt="Nosso momento 1">
+            <img class="carousel-media" src="Amor2.jpg" alt="Nosso momento 2">
+            <img class="carousel-media" src="Amor4.jpg" alt="Nosso momento 3">
+            <img class="carousel-media" src="Amor5.jpg" alt="Nosso momento 4">
+      <!--      <video class="carousel-media" controls>
+                <source src="video.mp4" type="video/mp4">
+                Seu navegador não suporta vídeos.
+            </video>
+            -->
+        </div>
+        <div class="carousel-buttons">
+            <button onclick="mudarSlide(-1)">⬅️</button>
+            <button onclick="mudarSlide(1)">➡️</button>
+        </div>
     </div>
 
+    <div id="contador"></div> 
+
+    <img id="imagemFinal" src="Amor.jpeg" alt="Nossa foto juntos">
+
+    <div id="tempoPassado"></div>
+
     <script>
-        function calcularTempoPassado() {
-            const dataInicio = new Date(2024, 7, 30);
-            const agora = new Date();
-            
-            let anos = agora.getFullYear() - dataInicio.getFullYear();
-            let meses = agora.getMonth() - dataInicio.getMonth();
-            let dias = agora.getDate() - dataInicio.getDate();
-
-            if (meses < 0) {
-                anos--;
-                meses += 12;
-            }
-
-            if (dias < 0) {
-                meses--;
-                let ultimoDiaMesAnterior = new Date(agora.getFullYear(), agora.getMonth(), 0).getDate();
-                dias += ultimoDiaMesAnterior;
-                if (meses < 0) {
-                    meses += 12;
-                    anos--;
-                }
-            }
-
-            let resultado = "";
-            if (anos > 0) {
-                resultado = `${anos} ano${anos > 1 ? 's' : ''}, ${meses} mês${meses > 1 ? 'es' : ''} e ${dias} dia${dias > 1 ? 's' : ''}`;
-            } else if (meses > 0) {
-                resultado = `${meses} mês${meses > 1 ? 'es' : ''} e ${dias} dia${dias > 1 ? 's' : ''}`;
-            } else {
-                resultado = `${dias} dia${dias > 1 ? 's' : ''}`;
-            }
-
-            return resultado;
-        }
-
         function atualizarContador() {
-            const dataInicio = new Date("2024-08-30T00:00:00").getTime();
-            const agora = new Date().getTime();
+            const dataInicio = new Date("2024-08-30T00:00:00");
+            const agora = new Date();
             const diferenca = agora - dataInicio;
 
             if (diferenca < 0) {
@@ -148,29 +163,38 @@ Minha flor do oriente</p>
                 return;
             }
 
-            const dataAtual = new Date(dataInicio + diferenca);
-            const dia = String(dataAtual.getDate()).padStart(2, '0');
-            const mes = String(dataAtual.getMonth() + 1).padStart(2, '0');
-            const ano = dataAtual.getFullYear();
-            const hora = String(dataAtual.getHours()).padStart(2, '0');
-            const minuto = String(dataAtual.getMinutes()).padStart(2, '0');
-            const segundo = String(dataAtual.getSeconds()).padStart(2, '0');
+            const anos = agora.getFullYear() - dataInicio.getFullYear();
+            let meses = agora.getMonth() - dataInicio.getMonth();
+            let dias = agora.getDate() - dataInicio.getDate();
 
-            document.getElementById("contador").innerHTML = 
-                `${dia}/${mes}/${ano} ${hora}:${minuto}:${segundo}`;
-
-            document.getElementById("tempoPassado").innerHTML = 
-                `Tempo juntos: ${calcularTempoPassado()} ❤️`;
-            
-            const dataFim = new Date("2050-01-01T00:00:00").getTime();
-            if (agora >= dataFim) {
-                document.getElementById("contador").innerHTML = "Nosso amor é eterno! 💖";
-                document.getElementById("tempoPassado").innerHTML = "";
-                clearInterval(intervalo);
+            if (dias < 0) {
+                meses--;
+                dias += new Date(agora.getFullYear(), agora.getMonth(), 0).getDate();
             }
+            if (meses < 0) {
+                meses += 12;
+            }
+
+            let tempoFormatado = anos > 0 ? `${anos} anos, ` : "";
+            tempoFormatado += meses > 0 ? `${meses} meses e ` : "";
+            tempoFormatado += `${dias} dias`;
+
+            document.getElementById("contador").innerHTML = `Data Atual: ${agora.toLocaleString()}`;
+            document.getElementById("tempoPassado").innerHTML = `Tempo juntos: ${tempoFormatado} ❤️`;
         }
 
-        let intervalo = setInterval(atualizarContador, 1000);
+        function mudarSlide(direcao) {
+            const midias = document.querySelectorAll(".carousel-media");
+            let indice = Array.from(midias).findIndex(item => item.classList.contains("active"));
+
+            midias[indice].classList.remove("active");
+            if (midias[indice].tagName === "VIDEO") midias[indice].pause();
+
+            indice = (indice + direcao + midias.length) % midias.length;
+            midias[indice].classList.add("active");
+        }
+
+        setInterval(atualizarContador, 1000);
         atualizarContador();
     </script>
 
