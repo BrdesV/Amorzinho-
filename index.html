@@ -190,76 +190,28 @@ const midias = document.querySelectorAll(".carousel-media");
         }
 
            
-        function calcularTempoPassado() {
-            const dataInicio = new Date(2024, 7, 30);
-            const agora = new Date();
-            
-            let anos = agora.getFullYear() - dataInicio.getFullYear();
-            let meses = agora.getMonth() - dataInicio.getMonth();
-            let dias = agora.getDate() - dataInicio.getDate();
-
-            if (meses < 0) {
-                anos--;
-                meses += 12;
-            }
-
-            if (dias < 0) {
-                meses--;
-                let ultimoDiaMesAnterior = new Date(agora.getFullYear(), agora.getMonth(), 0).getDate();
-                dias += ultimoDiaMesAnterior;
-                if (meses < 0) {
-                    meses += 12;
-                    anos--;
-                }
-            }
-
-            let resultado = "";
-            if (anos > 0) {
-                resultado = `${anos} ano${anos > 1 ? 's' : ''}, ${meses} mês${meses > 1 ? 'es' : ''} e ${dias} dia${dias > 1 ? 's' : ''}`;
-            } else if (meses > 0) {
-                resultado = `${meses} mês${meses > 1 ? 'es' : ''} e ${dias} dia${dias > 1 ? 's' : ''}`;
-            } else {
-                resultado = `${dias} dia${dias > 1 ? 's' : ''}`;
-            }
-
-            return resultado;
-        }
-
+        
         function atualizarContador() {
-            const dataInicio = new Date("2024-08-30T00:00:00").getTime();
-            const agora = new Date().getTime();
-            const diferenca = agora - dataInicio;
+            const inicio = new Date("2024-08-30T13:20:00");
+            const agora = new Date();
+            let diff = agora - inicio;
 
-            if (diferenca < 0) {
-                document.getElementById("contador").innerHTML = "Aguardando o dia 30/08/2024...";
-                document.getElementById("tempoPassado").innerHTML = "";
-                return;
-            }
+            let segundos = Math.floor((diff / 1000) % 60);
+            let minutos = Math.floor((diff / 1000 / 60) % 60);
+            let horas = Math.floor((diff / 1000 / 60 / 60) % 24);
+            let dias = Math.floor(diff / (1000 * 60 * 60 * 24));
 
-            const dataAtual = new Date(dataInicio + diferenca);
-            const dia = String(dataAtual.getDate()).padStart(2, '0');
-            const mes = String(dataAtual.getMonth() + 1).padStart(2, '0');
-            const ano = dataAtual.getFullYear();
-            const hora = String(dataAtual.getHours()).padStart(2, '0');
-            const minuto = String(dataAtual.getMinutes()).padStart(2, '0');
-            const segundo = String(dataAtual.getSeconds()).padStart(2, '0');
+            let anos = Math.floor(dias / 365);
+            dias %= 365;
+            let meses = Math.floor(dias / 30);
+            dias %= 30;
 
-            document.getElementById("contador").innerHTML = 
-                `${dia}/${mes}/${ano} ${hora}:${minuto}:${segundo}`;
+            let tempoFormatado = anos > 0 ? `${anos} anos, ${meses} meses, ${dias} dias - ${horas}:${minutos}:${segundos}`
+                : meses > 0 ? `${meses} meses, ${dias} dias - ${horas}:${minutos}:${segundos}`
+                : `${dias} dias - ${horas}:${minutos}:${segundos}`;
 
-            document.getElementById("tempoPassado").innerHTML = 
-                `Tempo juntos: ${calcularTempoPassado()} ❤️`;
-            
-            const dataFim = new Date("2050-01-01T00:00:00").getTime();
-            if (agora >= dataFim) {
-                document.getElementById("contador").innerHTML = "Nosso amor é eterno! 💖";
-                document.getElementById("tempoPassado").innerHTML = "";
-                clearInterval(intervalo);
-            }
-        }
+            document.getElementById("contador").innerHTML = `Tempo juntos: ${tempoFormatado} ❤️`;
 
-        let intervalo = setInterval(atualizarContador, 1000);
-        atualizarContador();
        </script>
 
 </body>
