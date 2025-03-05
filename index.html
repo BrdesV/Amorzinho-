@@ -72,6 +72,44 @@ Minha flor do oriente</p>
     </div>
 
     <script>
+        function calcularTempoPassado() {
+            const dataInicio = new Date(2024, 7, 30); // 30/08/2024 (Mês começa do 0)
+            const agora = new Date();
+            
+            let anos = agora.getFullYear() - dataInicio.getFullYear();
+            let meses = agora.getMonth() - dataInicio.getMonth();
+            let dias = agora.getDate() - dataInicio.getDate();
+
+            // Ajuste para meses negativos
+            if (meses < 0) {
+                anos--;
+                meses += 12;
+            }
+
+            // Ajuste para dias negativos
+            if (dias < 0) {
+                meses--;
+                let ultimoDiaMesAnterior = new Date(agora.getFullYear(), agora.getMonth(), 0).getDate();
+                dias += ultimoDiaMesAnterior;
+                if (meses < 0) {
+                    meses += 12;
+                    anos--;
+                }
+            }
+
+            // Formatar saída
+            let resultado = "";
+            if (anos > 0) {
+                resultado = `${anos} ano${anos > 1 ? 's' : ''}, ${meses} mês${meses > 1 ? 'es' : ''} e ${dias} dia${dias > 1 ? 's' : ''}`;
+            } else if (meses > 0) {
+                resultado = `${meses} mês${meses > 1 ? 'es' : ''} e ${dias} dia${dias > 1 ? 's' : ''}`;
+            } else {
+                resultado = `${dias} dia${dias > 1 ? 's' : ''}`;
+            }
+
+            return resultado;
+        }
+
         function atualizarContador() {
             const dataInicio = new Date("2024-08-30T00:00:00").getTime();
             const agora = new Date().getTime();
@@ -79,14 +117,11 @@ Minha flor do oriente</p>
 
             if (diferenca < 0) {
                 document.getElementById("contador").innerHTML = "Aguardando o dia 30/08/2024...";
+                document.getElementById("tempoPassado").innerHTML = "";
                 return;
             }
 
-            const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
-            const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
-            const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
-
+            // Calcular data exata
             const dataAtual = new Date(dataInicio + diferenca);
             const dia = String(dataAtual.getDate()).padStart(2, '0');
             const mes = String(dataAtual.getMonth() + 1).padStart(2, '0');
@@ -95,12 +130,19 @@ Minha flor do oriente</p>
             const minuto = String(dataAtual.getMinutes()).padStart(2, '0');
             const segundo = String(dataAtual.getSeconds()).padStart(2, '0');
 
+            // Exibir a data atual baseada no tempo desde 30/08/2024
             document.getElementById("contador").innerHTML = 
                 `${dia}/${mes}/${ano} ${hora}:${minuto}:${segundo}`;
+
+            // Exibir tempo total decorrido desde 30/08/2024
+            document.getElementById("tempoPassado").innerHTML = 
+                `Tempo juntos: ${calcularTempoPassado()} ❤️`;
             
+            // Parar no ano de 2050
             const dataFim = new Date("2050-01-01T00:00:00").getTime();
             if (agora >= dataFim) {
                 document.getElementById("contador").innerHTML = "Nosso amor é eterno! 💖";
+                document.getElementById("tempoPassado").innerHTML = "";
                 clearInterval(intervalo);
             }
         }
