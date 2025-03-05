@@ -85,13 +85,15 @@ Minha flor do oriente</p>
         <div class="contador-container">
         <p class="titulo-final">Que esse tempo que estamos juntos só aumente como o nosso amor 💕</p>
         <div id="contador"></div>
-        <div>    /n
+        <div>    
+            <p></p>
         </div>
                <!-- Imagem abaixo do contador -->
         <div>
    <img id="imagem" src="Amor.jpeg" alt="" width="200" width="200"/>
     </div>
-            <div>    /n
+            <div>   
+                <p></p>
             </div>
         <div id="tempoPassado"></div>
     </div>
@@ -136,7 +138,7 @@ Minha flor do oriente</p>
         }
 
         function atualizarContador() {
-            const dataInicio = new Date("2024-08-30T00:00:00").getTime();
+            const dataInicio = new Date("2024-08-30\nT00:00:00").getTime();
             const agora = new Date().getTime();
             const diferenca = agora - dataInicio;
 
@@ -157,7 +159,7 @@ Minha flor do oriente</p>
 
             // Exibir a data atual baseada no tempo desde 30/08/2024
             document.getElementById("contador").innerHTML = 
-                `${dia}/${mes}/${ano} ${hora}:${minuto}:${segundo}`
+                `${dia}/${mes}/${ano} \n ${hora}:${minuto}:${segundo}`
 
             // Exibir tempo total decorrido desde 30/08/2024
             document.getElementById("tempoPassado").innerHTML = 
