@@ -138,7 +138,7 @@ Minha flor do oriente</p>
         }
 
         function atualizarContador() {
-            const dataInicio = new Date("2024-08-30\nT00:00:00").getTime();
+            const dataInicio = new Date("2024-08-30T00:00:00").getTime();
             const agora = new Date().getTime();
             const diferenca = agora - dataInicio;
 
@@ -159,7 +159,8 @@ Minha flor do oriente</p>
 
             // Exibir a data atual baseada no tempo desde 30/08/2024
             document.getElementById("contador").innerHTML = 
-                `${dia}/${mes}/${ano} \n ${hora}:${minuto}:${segundo}`
+                `${dia}/${mes}/${ano} 
+                ${hora}:${minuto}:${segundo}`
 
             // Exibir tempo total decorrido desde 30/08/2024
             document.getElementById("tempoPassado").innerHTML = 
