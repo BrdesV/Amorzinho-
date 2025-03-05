@@ -151,10 +151,45 @@ Minha flor do oriente</p>
 
     <div id="tempoPassado"></div>
 
-    <script>
-        function atualizarContador() {
-            const dataInicio = new Date("2024-08-30T00:00:00");
+       <script>
+        function calcularTempoPassado() {
+            const dataInicio = new Date(2024, 7, 30);
             const agora = new Date();
+            
+            let anos = agora.getFullYear() - dataInicio.getFullYear();
+            let meses = agora.getMonth() - dataInicio.getMonth();
+            let dias = agora.getDate() - dataInicio.getDate();
+
+            if (meses < 0) {
+                anos--;
+                meses += 12;
+            }
+
+            if (dias < 0) {
+                meses--;
+                let ultimoDiaMesAnterior = new Date(agora.getFullYear(), agora.getMonth(), 0).getDate();
+                dias += ultimoDiaMesAnterior;
+                if (meses < 0) {
+                    meses += 12;
+                    anos--;
+                }
+            }
+
+            let resultado = "";
+            if (anos > 0) {
+                resultado = `${anos} ano${anos > 1 ? 's' : ''}, ${meses} mês${meses > 1 ? 'es' : ''} e ${dias} dia${dias > 1 ? 's' : ''}`;
+            } else if (meses > 0) {
+                resultado = `${meses} mês${meses > 1 ? 'es' : ''} e ${dias} dia${dias > 1 ? 's' : ''}`;
+            } else {
+                resultado = `${dias} dia${dias > 1 ? 's' : ''}`;
+            }
+
+            return resultado;
+        }
+
+        function atualizarContador() {
+            const dataInicio = new Date("2024-08-30T00:00:00").getTime();
+            const agora = new Date().getTime();
             const diferenca = agora - dataInicio;
 
             if (diferenca < 0) {
@@ -163,40 +198,31 @@ Minha flor do oriente</p>
                 return;
             }
 
-            const anos = agora.getFullYear() - dataInicio.getFullYear();
-            let meses = agora.getMonth() - dataInicio.getMonth();
-            let dias = agora.getDate() - dataInicio.getDate();
+            const dataAtual = new Date(dataInicio + diferenca);
+            const dia = String(dataAtual.getDate()).padStart(2, '0');
+            const mes = String(dataAtual.getMonth() + 1).padStart(2, '0');
+            const ano = dataAtual.getFullYear();
+            const hora = String(dataAtual.getHours()).padStart(2, '0');
+            const minuto = String(dataAtual.getMinutes()).padStart(2, '0');
+            const segundo = String(dataAtual.getSeconds()).padStart(2, '0');
 
-            if (dias < 0) {
-                meses--;
-                dias += new Date(agora.getFullYear(), agora.getMonth(), 0).getDate();
+            document.getElementById("contador").innerHTML = 
+                `${dia}/${mes}/${ano} ${hora}:${minuto}:${segundo}`;
+
+            document.getElementById("tempoPassado").innerHTML = 
+                `Tempo juntos: ${calcularTempoPassado()} ❤️`;
+            
+            const dataFim = new Date("2050-01-01T00:00:00").getTime();
+            if (agora >= dataFim) {
+                document.getElementById("contador").innerHTML = "Nosso amor é eterno! 💖";
+                document.getElementById("tempoPassado").innerHTML = "";
+                clearInterval(intervalo);
             }
-            if (meses < 0) {
-                meses += 12;
-            }
-
-            let tempoFormatado = anos > 0 ? `${anos} anos, ` : "";
-            tempoFormatado += meses > 0 ? `${meses} meses e ` : "";
-            tempoFormatado += `${dias} dias`;
-
-            document.getElementById("contador").innerHTML = `Data Atual: ${agora.toLocaleString()}`;
-            document.getElementById("tempoPassado").innerHTML = `Tempo juntos: ${tempoFormatado} ❤️`;
         }
 
-        function mudarSlide(direcao) {
-            const midias = document.querySelectorAll(".carousel-media");
-            let indice = Array.from(midias).findIndex(item => item.classList.contains("active"));
-
-            midias[indice].classList.remove("active");
-            if (midias[indice].tagName === "VIDEO") midias[indice].pause();
-
-            indice = (indice + direcao + midias.length) % midias.length;
-            midias[indice].classList.add("active");
-        }
-
-        setInterval(atualizarContador, 1000);
+        let intervalo = setInterval(atualizarContador, 1000);
         atualizarContador();
-    </script>
+       </script>
 
 </body>
 </html>
