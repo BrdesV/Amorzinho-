@@ -109,6 +109,22 @@ Minha flor do oriente</p>
         atualizarContador();
     </script>
 <img src="Amor.jpeg" alt="" width="200" width="200"/>
+
+            // Exibir tempo total decorrido desde 30/08/2024
+            document.getElementById("tempoPassado\n").innerHTML = 
+                `Tempo juntos: ${calcularTempoPassado()} ❤️`;
+            
+            // Parar no ano de 2050
+            const dataFim = new Date("2050-01-01T00:00:00").getTime();
+            if (agora >= dataFim) {
+                document.getElementById("contador").innerHTML = "Nosso amor é eterno! 💖";
+                document.getElementById("tempoPassado").innerHTML = "";
+                clearInterval(intervalo);
+            }
+        }
+
+        let intervalo = setInterval(atualizarContador, 1000);
+        atualizarContador();
 </body>
 </html>
 
