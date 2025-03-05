@@ -152,6 +152,28 @@ Minha flor do oriente</p>
     <div id="tempoPassado"></div>
 
        <script>
+const midias = document.querySelectorAll(".carousel-media");
+        let indice = 0;
+
+        function mudarSlide(direcao) {
+            midias[indice].classList.remove("active");
+
+            // Se estiver no vídeo, pausa antes de mudar
+            if (midias[indice].tagName === "VIDEO") {
+                midias[indice].pause();
+            }
+
+            indice += direcao;
+            if (indice < 0) {
+                indice = midias.length - 1;
+            } else if (indice >= midias.length) {
+                indice = 0;
+            }
+
+            midias[indice].classList.add("active");
+        }
+
+           
         function calcularTempoPassado() {
             const dataInicio = new Date(2024, 7, 30);
             const agora = new Date();
