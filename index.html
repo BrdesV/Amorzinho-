@@ -5,7 +5,7 @@
     <title>Nosso Amor Eterno 💖</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: Dancing Script, Ballet;
             text-align: center;
             background-color: #ffdde1;
             color: #d6006c;
@@ -44,16 +44,24 @@
            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             margin-top: 10px;
         }
-                #tempoPassado  {
+                #imagem {
+            width: 400px; /* Ajuste conforme necessário */
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            display: block;
+            margin: 0 auto;
+        }
+        #tempoPassado {
             font-size: 2em;
             font-weight: bold;
             background: white;
             display: inline-block;
             padding: 15px 30px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+           box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             margin-top: 10px;
-                }
+        }
     </style>
 </head>
 <body>
@@ -143,11 +151,7 @@ Minha flor do oriente</p>
 
             // Exibir a data atual baseada no tempo desde 30/08/2024
             document.getElementById("contador").innerHTML = 
-                `${dia}/${mes}/${ano} ${hora}:${minuto}:${segundo}`;
-
-            <div>
-<img src="Amor.jpeg" alt="" width="200" width="200"/>
-                </div>
+                `${dia}/${mes}/${ano} ${hora}:${minuto}:${segundo}`
 
             // Exibir tempo total decorrido desde 30/08/2024
             document.getElementById("tempoPassado").innerHTML = 
@@ -165,6 +169,10 @@ Minha flor do oriente</p>
         let intervalo = setInterval(atualizarContador, 1000);
         atualizarContador();
     </script>
+
+    <div>
+<img src="Amor.jpeg" alt="" width="200" width="200"/>
+    </div>
 
 </body>
 </html>
